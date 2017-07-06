@@ -1,4 +1,12 @@
-# Add www to any URLs that do not have them:
-RewriteEngine on
-RewriteCond %{HTTP_HOST} !^www\.
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+# Redirect non-www to www
+Options +FollowSymLinks
+# turn mod_rewrite on
+RewriteEngine On
+# If https send to https://www.
+RewriteCond %{HTTP_HOST} ^RISHI.SPACE$ [NC]
+RewriteCond %{HTTPS} on
+RewriteRule ^(.*)$ https://www.RISHI.SPACE/$1 [R=301,L]
+# If http send to http://www.
+RewriteCond %{HTTP_HOST} ^RISHI.SPACE$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ http://www.RISHI.SPACE/$1 [R=301,L]
